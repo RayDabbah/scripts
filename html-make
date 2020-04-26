@@ -1,0 +1,51 @@
+#! /bin/bash
+
+#  You can call this to generate a boilerplate 
+#  html doc and open vscode with chrome.
+#  You can also pass in "vue" for 
+#  vue boilerpalte
+
+vueTemplate='<div id="app">Hello World!</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data(){
+            return {}
+        },
+    })
+</script>'
+if [ "$1" == "vue" ]; then
+    library="$vueTemplate"
+    else library='<h1>Hello World!</h1>'
+fi
+
+boilerPlate='<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     h1{
+
+     }
+    </style>
+</head>
+<body>  
+'"${library}"'  
+</body>
+</html>'
+
+name='/tmp/index';
+if [[ -e $name.html ]] ; then
+    i=1
+    while [[ -e $name-$i.html ]] ; do
+        let i++
+    done
+    name="$name-$i"
+fi
+
+newFileName="$name.html"
+echo "$boilerPlate" > $newFileName && code $newFileName &  google-chrome $newFileName;
