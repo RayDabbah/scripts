@@ -50,3 +50,11 @@ composer global require cpriego/valet-linux tightenco/lambo
 source $HOME/.bashrc
 valet install
 
+
+# jetbrains products
+sudo snap install datagrip --classic
+sudo snap install phpstorm --classic
+
+
+
+
