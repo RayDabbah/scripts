@@ -54,6 +54,7 @@ valet install
 # jetbrains products
 sudo snap install datagrip --classic
 sudo snap install phpstorm --classic
+sudo snap install  code --classic
 
 
 
