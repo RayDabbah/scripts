@@ -1,7 +1,7 @@
 #!/bin/bash -i
 
 #install scripts from this repo
-linkDir="$HOME/.local/bin/"
+linkDir="$HOME/bin/"
 
 if [ ! -d "$linkDir" ]
 then mkdir $linkDir
