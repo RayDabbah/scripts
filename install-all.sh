@@ -10,7 +10,7 @@ fi
 for f in *
 do
    if [ ! -L "$linkDir/$f" ]
-   then   ln -s "$f" "$linkDir/$f"
+   then   ln -s "$(pwd)/$f" "$linkDir/$f"
 fi
 done;
 
