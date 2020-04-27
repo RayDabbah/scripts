@@ -1,5 +1,22 @@
 #!/bin/bash -i
 
+#install scripts from this repo
+linkDir="$HOME/.local/bin/"
+
+if [ ! -d "$linkDir" ]
+then mkdir $linkDir
+fi
+
+for f in *
+do
+   if [ ! -L "$linkDir/$f" ]
+   then   ln -s "$f" $linkDir
+fi
+done;
+
+source $HOME/.bashrc
+
+
 #chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
