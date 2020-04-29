@@ -66,3 +66,5 @@ sudo snap install slack --classic
 wget -P "$HOME/bin/" https://raw.githubusercontent.com/paulirish/git-open/master/git-open
 chmod +x "$HOME/bin/git-open"
 
+# npm packages
+yarn global add diff-so-fancy
