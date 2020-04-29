@@ -58,6 +58,8 @@ sudo snap install phpstorm --classic
 # snaps
 sudo snap install hub --classic
 sudo snap install  code --classic
+sudo snap install slack --classic
+
 
 
 # git-open
