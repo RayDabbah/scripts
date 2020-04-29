@@ -60,5 +60,7 @@ sudo snap install hub --classic
 sudo snap install  code --classic
 
 
-
+# git-open
+wget -P "$HOME/bin/" https://raw.githubusercontent.com/paulirish/git-open/master/git-open
+chmod +x "$HOME/bin/git-open"
 
