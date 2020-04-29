@@ -67,4 +67,5 @@ wget -P "$HOME/bin/" https://raw.githubusercontent.com/paulirish/git-open/master
 chmod +x "$HOME/bin/git-open"
 
 # npm packages
-yarn global add diff-so-fancy
+yarn global add diff-so-fancy nodemon
+
