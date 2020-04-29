@@ -1,7 +1,9 @@
 #!/bin/bash
 
 inside_git_repo="$(git rev-parse --is-inside-work-tree 2>/dev/null)"
+
 base=${2:-master}
+
 if [ "$1" == "n" ]; then
       github_path="compare/${base}...$(git rev-parse --abbrev-ref HEAD)"
  else github_path="pulls"

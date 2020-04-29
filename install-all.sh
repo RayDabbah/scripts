@@ -40,7 +40,7 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt update
 
 sudo install-php 7.4
-sudo apt install git composer mysql-server fzf vim network-manager libnss3-tools jq xsel tldr -y
+sudo apt install git composer mysql-server fzf vim network-manager libnss3-tools jq xsel tldr diodon -y
 sudo apt install --no-install-recommends yarn -y
 sudo apt install ./google-chrome-stable_current_amd64.deb
 
