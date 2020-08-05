@@ -1,0 +1,12 @@
+#!/bin/bash
+
+currentBranch=$(git branch --show-current);
+git fetch;
+for arg; do
+	git checkout "$arg";
+	git rebase origin/master;
+done;
+
+git push --force-with-lease origin "$@";
+	
+git checkout $currentBranch;
