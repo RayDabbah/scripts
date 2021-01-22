@@ -6,6 +6,8 @@ inside_git_repo="$(git rev-parse --is-inside-work-tree 2>/dev/null)"
 
 base=${2:-master}
 currentBranch=$(git rev-parse --abbrev-ref HEAD)
+baseHash=$(git show-ref --heads -s "${base}")
+commonAncestorWithBase=$(git merge-base "${base}" "${currentBranch}")
 
 if [ "$1" == "n" ]; then
       github_path="compare/${base}...${currentBranch}"
@@ -21,10 +23,20 @@ git_url_without_dot_git=$(sed s/\\.git// <<< $remove_at_git_from_url)
 replace_second_colon=$(sed s-:-/-2 <<< $git_url_without_dot_git)
 
 if [ "$1" == "n" ]; then
-git push origin "$currentBranch" 
-fi
-exec google-chrome  "${replace_second_colon}/${github_path}" > /dev/null 2>&1
 
+if [ "$baseHash" != "$commonAncestorWithBase" ]; then
+	echo "It looks like your branch ${currentBranch} is not up to date with master. Would you like to rebase it before pushing? (y/n)"
+
+read answer
+
+if [ "$answer" == 'y' ]; then
+  git rebase origin/master
+fi
+
+fi
+git push origin "$currentBranch"
+exec google-chrome  "${replace_second_colon}/${github_path}" > /dev/null 2>&1
+fi
 else
 
   echo "This is not a git repository"
