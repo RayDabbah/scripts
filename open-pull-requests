@@ -10,35 +10,36 @@ baseHash=$(git show-ref --heads -s "${base}")
 commonAncestorWithBase=$(git merge-base "${base}" "${currentBranch}")
 
 if [ "$1" == "n" ]; then
-      github_path="compare/${base}...${currentBranch}"
- else github_path="pulls"
+    github_path="compare/${base}...${currentBranch}"
+else
+    github_path="pulls"
 fi
 
 if [ $inside_git_repo ]; then
- 
-remove_at_git_from_url="$(sed s-git@-https://- <<< $(git remote get-url origin))"
 
-git_url_without_dot_git=$(sed s/\\.git// <<< $remove_at_git_from_url)
+    remove_at_git_from_url="$(sed s-git@-https://- <<<$(git remote get-url origin))"
 
-replace_second_colon=$(sed s-:-/-2 <<< $git_url_without_dot_git)
+    git_url_without_dot_git=$(sed s/\\.git// <<<$remove_at_git_from_url)
 
-if [ "$1" == "n" ]; then
+    replace_second_colon=$(sed s-:-/-2 <<<$git_url_without_dot_git)
 
-if [ "$baseHash" != "$commonAncestorWithBase" ]; then
-	echo "It looks like your branch ${currentBranch} is not up to date with master. Would you like to rebase it before pushing? (y/n)"
+    if [ "$1" == "n" ]; then
 
-read answer
+        if [ "$baseHash" != "$commonAncestorWithBase" ]; then
+            echo "It looks like your branch ${currentBranch} is not up to date with master. Would you like to rebase it before pushing? (y/n)"
 
-if [ "$answer" == 'y' ]; then
-  git rebase origin/master
-fi
+            read answer
 
-fi
-git push origin "$currentBranch"
-fi
-exec google-chrome  "${replace_second_colon}/${github_path}" > /dev/null 2>&1
+            if [ "$answer" == 'y' ]; then
+                git rebase origin/master
+            fi
+
+        fi
+        git push origin "$currentBranch"
+    fi
+    exec google-chrome "${replace_second_colon}/${github_path}" >/dev/null 2>&1
 else
 
-  echo "This is not a git repository"
+    echo "This is not a git repository"
 
 fi
