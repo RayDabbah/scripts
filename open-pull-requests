@@ -35,8 +35,8 @@ fi
 
 fi
 git push origin "$currentBranch"
-exec google-chrome  "${replace_second_colon}/${github_path}" > /dev/null 2>&1
 fi
+exec google-chrome  "${replace_second_colon}/${github_path}" > /dev/null 2>&1
 else
 
   echo "This is not a git repository"
