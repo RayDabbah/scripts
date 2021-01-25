@@ -26,12 +26,12 @@ if [ $inside_git_repo ]; then
     if [ "$1" == "n" ]; then
 
         if [ "$baseHash" != "$commonAncestorWithBase" ]; then
-            echo "It looks like your branch ${currentBranch} is not up to date with master. Would you like to rebase it before pushing? (y/n)"
+            echo "It looks like your branch ${currentBranch} is not up to date with ${base}. Would you like to rebase it before pushing? (y/n)"
 
             read answer
 
             if [ "$answer" == 'y' ]; then
-                git rebase origin/master
+                git rebase origin/"${base}"
             fi
 
         fi
