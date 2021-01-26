@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 currentBranch=$(git branch --show-current);
 git fetch;
 for arg; do
