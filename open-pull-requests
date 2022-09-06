@@ -11,6 +11,8 @@ commonAncestorWithBase=$(git merge-base "${base}" "${currentBranch}")
 
 if [ "$1" == "n" ]; then
     github_path="compare/${base}...${currentBranch}"
+elif [[ "$1" =~ ^[0-9]+$ ]]; then
+    github_path="pull/$1"
 else
     github_path="pulls"
 fi
