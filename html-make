@@ -48,4 +48,4 @@ if [[ -e $name.html ]] ; then
 fi
 
 newFileName="$name.html"
-echo "$boilerPlate" > $newFileName && code $newFileName &  google-chrome $newFileName;
+echo "$boilerPlate" > $newFileName && code $newFileName &  google-chrome $newFileName >/dev/null 2>&1;
