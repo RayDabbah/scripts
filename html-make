@@ -5,7 +5,7 @@
 #  You can also pass in "vue" for 
 #  vue boilerpalte
 
-vueTemplate='<div id="app">Hello World!</div>
+vue2Template='<div id="app">Hello World!</div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
     new Vue({
@@ -15,8 +15,39 @@ vueTemplate='<div id="app">Hello World!</div>
         },
     })
 </script>'
-if [ "$1" == "vue" ]; then
-    library="$vueTemplate"
+
+vue3Template='<div id="app">
+
+        {{number}}
+
+        <foo-bar />
+
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+
+        const { createApp } = Vue
+
+
+        const app = createApp({
+            data() {
+                return {
+                    number: 2
+                }
+            },
+        })
+
+        app.component("foo-bar", { template: `<div>Hello From foo-bar</div>`,})
+
+        app.mount("#app")
+    </script>'
+
+if [ "$1" == "vue2" ]; then
+    library="$vue2Template"
+
+elif [ "$1" == "vue" ]; then
+    library="$vue3Template"
     else library='<h1>Hello World!</h1>'
 fi
 
@@ -48,4 +79,4 @@ if [[ -e $name.html ]] ; then
 fi
 
 newFileName="$name.html"
-echo "$boilerPlate" > $newFileName && code $newFileName &  google-chrome $newFileName >/dev/null 2>&1;
+echo "$boilerPlate" > $newFileName && code $newFileName >/dev/null 2>&1 &  google-chrome $newFileName >/dev/null 2>&1;
