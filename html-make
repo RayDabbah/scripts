@@ -16,7 +16,14 @@ vue2Template='<div id="app">Hello World!</div>
     })
 </script>'
 
-vue3Template='<div id="app">
+vue3Template=' <script type="text/x-template" id="foo-bar">
+        <div>
+            <div>
+                Hello From the <b>Foo Bar</b> component
+            </div>
+        </div>
+    </script>
+    <div id="app">
 
         {{number}}
 
@@ -38,7 +45,7 @@ vue3Template='<div id="app">
             },
         })
 
-        app.component("foo-bar", { template: `<div>Hello From foo-bar</div>`,})
+        app.component("foo-bar", { template: "#foo-bar" })
 
         app.mount("#app")
     </script>'
