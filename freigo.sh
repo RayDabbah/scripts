@@ -1,8 +1,16 @@
 #!/bin/bash
-gnome-terminal --working-directory=/home/raydabbah/Documents/freigo/ --title=Freigo
+
+WORKING_DIR='/home/raydabbah/Documents/freigo/'
+
+gnome-terminal --working-directory=$WORKING_DIR --title=Freigo
+
 cd /home/raydabbah/Documents/freigo/ || exit
-nohup laravel-echo-server start >/dev/null 2>&1 &
+
+nohup laravel-echo-server start --force >/dev/null 2>&1 &
+
+gnome-terminal --working-directory=$WORKING_DIR --title=Horizon -- nodemon -e php --watch app --exec "php artisan horizon:terminate && php artisan horizon"
+
 if [[ $1 = "--dev" || $1 = "-d" ]]; then
-yarn dev
+    yarn dev
 fi
 yarn hot
