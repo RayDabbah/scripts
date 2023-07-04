@@ -12,10 +12,6 @@ LARAVEL_ECHO_SERVER_PID=$!
 
 gnome-terminal --working-directory=$WORKING_DIR --title=Horizon -- nodemon -e php --watch app --exec "php artisan horizon:terminate && php artisan horizon"
 
-if [[ $1 = "--dev" || $1 = "-d" ]]; then
-    yarn dev
-fi
-
 yarn hot
 
 kill $(ps -u$(whoami) -o pid,cmd | ps -u1000 -o pid,cmd | awk '/\snode.*nodemon.*php/ {print $1}')
