@@ -1,10 +1,10 @@
 #!/bin/bash
 
-WORKING_DIR='/home/raydabbah/Documents/freigo/'
+WORKING_DIR="$HOME/Documents/freigo/"
 
 gnome-terminal --working-directory=$WORKING_DIR --title=Horizon -- nodemon -e php --watch app --exec "php artisan horizon:terminate && php artisan horizon"
 
-cd /home/raydabbah/Documents/freigo/ || exit
+cd $WORKING_DIR || exit
 
 nohup laravel-echo-server start --force >/dev/null 2>&1 &
 
