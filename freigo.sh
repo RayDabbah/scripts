@@ -2,7 +2,7 @@
 
 WORKING_DIR='/home/raydabbah/Documents/freigo/'
 
-gnome-terminal --working-directory=$WORKING_DIR --title=Freigo
+gnome-terminal --working-directory=$WORKING_DIR --title=Horizon -- nodemon -e php --watch app --exec "php artisan horizon:terminate && php artisan horizon"
 
 cd /home/raydabbah/Documents/freigo/ || exit
 
@@ -10,7 +10,7 @@ nohup laravel-echo-server start --force >/dev/null 2>&1 &
 
 LARAVEL_ECHO_SERVER_PID=$!
 
-gnome-terminal --working-directory=$WORKING_DIR --title=Horizon -- nodemon -e php --watch app --exec "php artisan horizon:terminate && php artisan horizon"
+gnome-terminal --working-directory=$WORKING_DIR --title=Freigo
 
 yarn hot
 
