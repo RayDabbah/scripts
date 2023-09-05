@@ -12,7 +12,7 @@ LARAVEL_ECHO_SERVER_PID=$!
 
 gnome-terminal --working-directory=$WORKING_DIR --title=Freigo
 
-yarn hot
+npm run hot
 
 kill $(ps -u$(whoami) -o pid,cmd | ps -u1000 -o pid,cmd | awk '/\snode.*nodemon.*php/ {print $1}')
 
