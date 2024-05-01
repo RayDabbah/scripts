@@ -1,7 +1,7 @@
 #! /bin/bash
 version="$1";
 if [ $version ]; then
-apt install "php$version-"{mysql,mbstring,cli,bcmath,cgi,curl,fpm,gmp,opcache,xml,zip,sqlite3,gd,intl} php-redis -y
+apt install "php$version-"{mysql,mbstring,cli,bcmath,cgi,curl,fpm,gmp,opcache,xml,zip,sqlite3,gd,intl,imagick} php-redis -y
 else echo 'You need to specify a php version!' >&2;
 exit 1;
 fi
