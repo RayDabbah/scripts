@@ -1,6 +1,10 @@
 #! /bin/bash
 
 for arg; do
-    git push origin :"$arg" 2>/dev/null;
-    git branch -D "$arg" 2>/dev/null;
+    for remote in $(git remote); do
+        echo "deleting  $remote/$arg"
+        git push $remote :"$arg" 2>/dev/null
+    done
+    echo "deleting  local $arg"
+    git branch -D "$arg" 2>/dev/null
 done
