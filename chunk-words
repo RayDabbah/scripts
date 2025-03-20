@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+const sentence = process.argv[2];
+
+const maxLength = process.argv[3] ?? 140;
+
+console.log('\n\n');
+
+console.log(chunkWords(sentence, maxLength), '\n');
+function chunkWords(sentence, maxLength = 140) {
+    const words = sentence.split(' ').filter(char => char);
+
+    return words
+        .reduce(
+            function (acc, word) {
+                const current = acc.at(-1);
+
+                if (word.length > maxLength)
+                    throw new Error(`${word} is longer than ${maxLength}. Cannot chunk this sentence`);
+
+                const newChunk = current.concat(` ${word}`).trim();
+
+                if (newChunk.length > maxLength) return acc.concat(word);
+
+                return acc.slice(0, -1).concat(newChunk);
+            },
+            ['']
+        )
+        .join('\n\n');
+}
