@@ -1,0 +1,65 @@
+#!/bin/bash
+
+
+# Check for root
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
+
+
+usage() {
+    echo "Usage: whitelist-domain add|remove <domain> [dns-server]"
+    echo ""
+    echo "Examples:"
+    echo "whitelist-domain add example.com"
+    echo "whitelist-domain add example.com 1.2.3.4"
+    exit 1
+}
+
+if [[ $# -lt 1 || $1 = "--help" ]]; then
+
+    usage
+fi
+
+CONFIG_FILE="/etc/dnsmasq.d/open-dns"
+
+DEFAULT_DNS="1.1.1.1"
+
+ACTION=$1
+DOMAIN=$2
+DNS_SERVER=${3:-$DEFAULT_DNS} # if $3 is empty, use DEFAULT_DNS
+
+if [[ $# -eq 1 ]]; then
+    ACTION='add'
+    DOMAIN=$1
+fi
+
+
+
+case $ACTION in
+    add)
+        if grep -q  "server=/$DOMAIN/" "$CONFIG_FILE"; then
+            echo "$DOMAIN is already in the list"
+        else
+            echo "server=/$DOMAIN/$DNS_SERVER" >> "$CONFIG_FILE"
+            echo "Added $DOMAIN -> $DNS_SERVER"
+        fi
+        ;;
+    remove)
+        if grep -q  "server=/$DOMAIN/" "$CONFIG_FILE"; then
+            sed -i "s|server=/$DOMAIN/.*||" "$CONFIG_FILE"
+            sed -i '/^$/d' "$CONFIG_FILE"  # remove empty lines
+            echo "Removed $DOMAIN"
+        else
+            echo "$DOMAIN not found in the list"
+        fi
+        ;;
+    *)
+        usage
+        ;;
+esac
+
+
+service dnsmasq restart
+
