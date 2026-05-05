@@ -24,6 +24,7 @@ if [ $inside_git_repo ]; then
     git_url_without_dot_git=$(sed s/\\.git// <<<$remove_at_git_from_url)
 
     replace_second_colon=$(sed s-:-/-2 <<<$git_url_without_dot_git)
+    github_repo_url=${replace_second_colon%/}
 
     if [ "$1" == "n" ]; then
 
@@ -39,7 +40,7 @@ if [ $inside_git_repo ]; then
         fi
         git push origin "$currentBranch"
     fi
-    exec google-chrome "${replace_second_colon}/${github_path}" >/dev/null 2>&1
+    exec google-chrome "${github_repo_url}/${github_path}" >/dev/null 2>&1
 else
 
     echo "This is not a git repository"
