@@ -33,15 +33,12 @@ nvm install --lts
 
 # add apt repositories
 sudo add-apt-repository ppa:ondrej/php -y
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 # apt installs
 sudo apt update
 
-sudo ./install-php 7.4 -y
+sudo ./install-php 8.4 -y
 sudo apt install git composer mysql-server fzf vim network-manager libnss3-tools jq xsel tldr diodon -y
-sudo apt install --no-install-recommends yarn -y
 sudo apt install ./google-chrome-stable_current_amd64.deb
 sudo apt install redis
 
@@ -68,5 +65,5 @@ wget -P "$HOME/bin/" https://raw.githubusercontent.com/paulirish/git-open/master
 chmod +x "$HOME/bin/git-open"
 
 # npm packages
-yarn global add diff-so-fancy nodemon
+npm install -g   nodemon
 
